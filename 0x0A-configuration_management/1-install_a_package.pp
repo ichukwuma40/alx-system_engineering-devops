@@ -1,5 +1,6 @@
-# Using Puppet to create a manifest that kills a process
-exec { 'killmenow':
-  command  => 'pkill killmenow',
-  provider => 'shell'
+#!/usr/bin/pup
+#install a especific version of fask(2.1.0)
+package { 'flask':
+  ensure   => '2.1.0',
+  provider => 'pip3'
 }
