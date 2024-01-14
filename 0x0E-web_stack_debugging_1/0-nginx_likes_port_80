@@ -1,5 +1,44 @@
-#!/usr/bin/env bash
-# To configure a server to listen on port 80 of all server's active IPv4 IPs
+#!/bin/bash
 
-sudo sed -i "s/8080/80/" /etc/nginx/sites-enabled/default
-sudo service nginx restart
+# Function to check if Nginx is running on port 80
+check_nginx_status() {
+    local nginx_status
+    nginx_status=$(netstat -tuln | grep ":80 ")
+    if [ -n "$nginx_status" ]; then
+        echo "Nginx is already running on port 80."
+        return 0
+    else
+        echo "Nginx is not running on port 80."
+        return 1
+    fi
+}
+
+# Function to install Nginx if not installed
+install_nginx() {
+    if ! command -v nginx &> /dev/null; then
+        echo "Installing Nginx..."
+        sudo apt-get update
+        sudo apt-get install -y nginx
+    else
+        echo "Nginx is already installed."
+    fi
+}
+
+# Function to configure Nginx to listen on port 80 for all active IPv4 IPs
+configure_nginx() {
+    sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
+
+    # Modify the default Nginx configuration file to listen on port 80 for all IPv4 IPs
+    sudo sed -i 's/listen 80 default_server;/listen 80 default_server ipv4only=on;/g' /etc/nginx/sites-available/default
+
+    # Restart Nginx to apply the changes
+    sudo systemctl restart nginx
+
+    echo "Nginx is now configured to listen on port 80 for all active IPv4 IPs."
+}
+
+# Main script logic
+if check_nginx_status; then
+    echo "Exiting script."
+    exit 0
+fi
