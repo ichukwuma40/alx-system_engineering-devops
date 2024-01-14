@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
-# debugging nginx port 80
-# How I solved it: delete the existing ../sites-enabled/default and replace it with a copy of
-# ../sites-available/default. You do that by creating a symbolic link.
-# rm /etc/nginx/sites-enaled/default
-# NB: The flag -s creates a symbolic link, -f deletes the existing file and replaces
+# Configure an Nginx server to listen to port 80.
+
+# creates a symbolic link (-s option) between the Nginx configuration file
+# and the enabled sites directory and replaces
 In -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 # restart nginx
-service nginx restart
+service nginx start
 # terminate the first nginx process I
 kill "$(pgrep 'nginx' | head -1)"
