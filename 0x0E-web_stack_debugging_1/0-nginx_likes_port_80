@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-# Configure an Nginx server to listen to the port 80.
+# configures a server to listening on port 80 of all server's active IPv4 IPs
 
-# creates a symbolic link (-s option) between Nginx configuration file
-# and the enabled sites directory and replaces it
-rm /etc/nginx/sites-available/default
-# Configures Nginx to listen to port 80 for all active Ipv4 IPS
-In -s /etc/nginx/sites-available/default /etc/nginx/sites-available/default
-# restart nginx
-service nginx restart
+sudo sed -i "s/8080/80/" /etc/nginx/sites-enabled/default
+sudo service nginx restart
