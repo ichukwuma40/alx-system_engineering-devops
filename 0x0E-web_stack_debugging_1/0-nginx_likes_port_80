@@ -3,8 +3,8 @@
 
 # creates a symbolic link (-s option) between the Nginx configuration file
 # and the enabled sites directory and replaces
-In -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-available/default
+# Configure Nginx to listen to port 80 for all active Ipv4 IPS
+In -s /etc/nginx/sites-available/default /etc/nginx/sites-available/default
 # restart nginx
-service nginx start
-# terminate the first nginx process I
-kill "$(pgrep 'nginx' | head -1)"
+service nginx restart
