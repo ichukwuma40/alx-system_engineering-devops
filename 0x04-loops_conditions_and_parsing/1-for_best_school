@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
+<<<<<<< HEAD
 #Displays "Best School" 10 times using a for loop.
+=======
+# Displays "Best School" 10 times using a for loop.
+>>>>>>> 1aa9728e8c42700a407bd7c5a0ffb050bbbcb6b3
 
 for (( i=0; i<10; i++ )) 
 do

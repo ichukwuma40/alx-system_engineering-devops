@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 Hrses Apache log files in list format.
+=======
+#!/usr/bin/env bash
+# Parses Apache log files in list format.
+>>>>>>> 1aa9728e8c42700a407bd7c5a0ffb050bbbcb6b3
 #   Groups visitors by IP and HTTP status code.
 #   Displays the number of occurrences, IP, and HTTP status
 #+  code of each log, in sorted order.
